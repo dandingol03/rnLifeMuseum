@@ -1,0 +1,4 @@
+
+module.exports={
+    ON_GET_COURSE_ACHIEVEMENT:'ON_GET_COURSE_ACHIEVEMENT'
+}
