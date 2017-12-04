@@ -101,9 +101,7 @@ class Home extends Component {
                     }
                 })
             });
-
         }
-
     }
 
 
@@ -140,6 +138,7 @@ class Home extends Component {
                 //this.navigate2VideoViewT()
                 //Bridge.invokeBufferingActivity()
                  this.ToCourseInfo({courseId:rowData.courseId,taskId:rowData.taskId})
+
             }}>
 
                 <View style={{
