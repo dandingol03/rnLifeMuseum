@@ -9,6 +9,9 @@ import {
     UPDATE_PERSON_COURSES
 } from '../constants/CourseConstants';
 
+import {
+    RTMP_UPDATE_URL
+} from '../constants/LiveConstants';
 
 
 const initialState = {
@@ -16,7 +19,8 @@ const initialState = {
     auth: false,
     personInfo: null,
     portrait: null,
-    courses:null
+    courses:null,
+    rtmpPush:null
 };
 
 let user = (state = initialState, action) => {
@@ -41,6 +45,11 @@ let user = (state = initialState, action) => {
                 username: username,
                 password: password,
                 auth:true
+            })
+        case RTMP_UPDATE_URL:
+            var {url}=action.payload
+            return Object.assign({}, state, {
+                rtmpPush: {url:url}
             })
 
         case SET_AUTH_TRUE:

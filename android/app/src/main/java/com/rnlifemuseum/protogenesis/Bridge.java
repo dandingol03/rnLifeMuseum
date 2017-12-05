@@ -7,6 +7,7 @@ import android.util.Log;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.rnlifemuseum.plsteam.SWCameraStreamingActivity;
 
 
 public class Bridge extends ReactContextBaseJavaModule {
@@ -44,6 +45,15 @@ public class Bridge extends ReactContextBaseJavaModule {
         intent.putExtra("cache",
                 Environment.getExternalStorageDirectory().getAbsolutePath()
                         + "/VideoCache/" + System.currentTimeMillis() + ".mp4");
+        getCurrentActivity().startActivity(intent);
+    }
+
+    @ReactMethod
+    public void raisePLStream(String url)
+    {
+        Intent intent=new Intent();
+        intent.setClass(getCurrentActivity(), SWCameraStreamingActivity.class);
+        intent.putExtra("url",url);
         getCurrentActivity().startActivity(intent);
     }
 

@@ -36,6 +36,12 @@ import {
     getHomeworkByTaskId
 } from '../actions/HomworkActions'
 
+import {
+    getRTMPPushUrl
+} from '../actions/LiveActions'
+
+import Bridge from '../native/Bridge'
+
 class CourseInfo extends Component {
 
     constructor(props) {
@@ -188,8 +194,30 @@ class CourseInfo extends Component {
                         </Text>
                     </View>
 
-                    <View style={{width:75}}>
-                    </View>
+                    <View style={{flex:1}}></View>
+
+
+                    <TouchableOpacity style={{width:75}}
+                                      onPress={()=>{
+
+                                          var date=new Date()
+                                          var dateStr=''
+
+
+                                          this.props.dispatch(getRTMPPushUrl({
+                                              time:3600,
+                                              loginName:this.props.username,
+                                              title:'test',
+                                              brief:'nothing big deal',
+                                              longbrief:'the same'
+                                          })).then((json)=>{
+                                            //开直播
+                                            Bridge.raisePLStream(json.data)
+                                          })
+                                      }}
+                    >
+                        <Icon name={'video-camera'} size={25} color="#444"/>
+                    </TouchableOpacity>
 
                 </View>
 
@@ -312,5 +340,15 @@ var styles = StyleSheet.create({
 
 });
 
-module.exports = connect(state => ({})
+const mapStateToProps = (state, ownProps) => {
+
+    const props = {
+        username:state.user.username,
+    }
+
+    return props
+}
+
+module.exports = connect(
+    mapStateToProps
 )(CourseInfo);
